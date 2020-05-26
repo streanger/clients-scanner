@@ -68,3 +68,5 @@ Todo
     - consider splitting main class, into three independend (gui, search_clients, deauth)
 
     - provide handle for searching gateway_ip and gateway_mac (independend of interface)
+    
+    - store config files in package files directory
