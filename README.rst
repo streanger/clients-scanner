@@ -50,7 +50,8 @@ Todo
     - fix gui (with changes above), to work on linux
 
     - log users activity, to file, in the following format, line by line:
-        <current time>, <client mac>, <True/False>
+    
+      <current time>, <client mac>, <True/False>
 
     - think of scanning for open ports
 
@@ -59,7 +60,8 @@ Todo
     - define device type, by vendor, if not specified by user
 
     - add bar with info about columns:
-        DEVICE_TYPE, NAME, INFO, VISIBLE, DEAUTH, DEAUTH_CONTROLL
+    
+      DEVICE_TYPE, NAME, INFO, VISIBLE, DEAUTH, DEAUTH_CONTROLL
 
     - think of early warning system, if device is seen
 
