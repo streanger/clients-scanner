@@ -4,8 +4,13 @@ Local network clients scanner, with possibility of deauthentication
 
 Info
 ===========
-Application shows local network devices. Stores known devices in client.ini file. Allows us, to perform deauthentication.
-
+    - when creating app I was inspired by Android Fing application
+    - application shows local network devices
+    - stores known devices in client.ini file
+    - allows us, to perform deauthentication(disconnecting devices connected over WiFi)
+    - deauthentication bases on: https://github.com/roglew/wifikill
+    - any future changes are described in "Todo" section
+    
 Install
 ===========
 
