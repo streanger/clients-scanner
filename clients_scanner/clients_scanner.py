@@ -12,6 +12,7 @@ import datetime
 import ctypes
 import random
 import subprocess
+from pathlib import Path
 from collections import defaultdict
 from functools import partial
 from threading import Thread
@@ -96,6 +97,18 @@ def read_json(filename):
     except FileNotFoundError:
         print("[x] file not found: {}".format(filename))
     return data
+
+
+def get_config_directory():
+    """create config directory in users home
+    https://stackoverflow.com/questions/11174769/python-save-files-to-user-folder-windows
+    https://stackoverflow.com/questions/22947427/getting-home-directory-with-pathlib
+    home_directory = os.path.expanduser("~")
+    """
+    home_directory = Path.home()
+    config_directory = home_directory.joinpath('scanner')
+    config_directory.mkdir(exist_ok=True)
+    return config_directory
 
 
 class VerticalScrolledFrame:
@@ -472,6 +485,8 @@ class DevicesMatcher:
         self.ssid = ""
         self.bssid = ""
         self.clients_file = "clients.json"
+        self.config_directory = get_config_directory()
+        self.clients_file = self.config_directory.joinpath(self.clients_file)
         self.clients_all = read_json(self.clients_file)
         self.last_seen_timeout = 20  # [s]
 
@@ -796,6 +811,8 @@ class GuiClass(Frame):
         self.deauth_status = {}  # mac - status reference
 
         self.config_file = "config.json"
+        self.config_directory = get_config_directory()
+        self.config_file = self.config_directory.joinpath(self.config_file)
         self.config = read_json(self.config_file)
         if not self.config:
             self.config = {
