@@ -12,7 +12,7 @@ images = [os.path.join('images', item) for item in os.listdir('clients_scanner/i
 
 setuptools.setup(
     name='clients_scanner',
-    version='0.1.1',
+    version='0.1.2',
     author="streanger",
     author_email="divisionexe@gmail.com",
     description="local network clients scanner, with possibility of deauthentication",
@@ -21,10 +21,15 @@ setuptools.setup(
     url="https://github.com/streanger/clients_scanner",
     packages=['clients_scanner',],
     license='MIT',
-    install_requires=['Pillow>=7.2.0', 'scapy', 'mac-vendor-lookup'],
+    install_requires=['Pillow', 'scapy', 'mac-vendor-lookup', 'termcolor'],
     include_package_data=True,
     package_data={
         'clients_scanner': images,
+    },
+    entry_points={
+        "console_scripts": [
+            "scanner=clients_scanner:scanner_cli",
+        ]
     },
     classifiers=[
         "Programming Language :: Python :: 3",
