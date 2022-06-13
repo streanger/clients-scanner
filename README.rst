@@ -6,8 +6,8 @@ Info
 ===========
     - when creating app I was inspired by Android Fing application
     - application shows local network devices
-    - stores known devices in client.ini file
-    - allows us, to perform deauthentication(disconnecting devices connected over WiFi)
+    - discovered devices are stored in clients.json file
+    - application allow to perform deauthentication(disconnecting devices connected over WiFi)
     - deauthentication bases on: https://github.com/roglew/wifikill
     - any future changes are described in "Todo" section
     
@@ -17,9 +17,17 @@ Install
 .. code-block:: python
 
     pip install clients_scanner
+    
+or
 
+.. code-block:: bash
+
+    pip install git+https://github.com/streanger/clients_scanner.git
+    
 Usage
 ===========
+
+from python
 
 .. code-block:: python
 
@@ -29,10 +37,15 @@ Usage
     # then just press enter, and wait for gui app to start running
     # due to slow import of scapy, it could take few seconds
 
+from cli
+
+.. code-block:: bash
+
+    scanner
 
 Example application view
 ===========
-.. image:: example_view.png
+.. image:: images/example_view.png
 
 Todo
 ===========
