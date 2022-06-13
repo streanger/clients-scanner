@@ -1,6 +1,6 @@
-"""clients scanner gui_app
-version: 0.0.2
-date: 10.07.2021
+"""clients_scanner
+version: 0.1.2
+date: 13.06.2022
 author: streanger
 """
 import sys
@@ -40,6 +40,7 @@ from tkinter import (
     X,
     Y,
 )
+
 # from tkinter.ttk import Style, Scrollbar
 from PIL import ImageTk, Image, ImageDraw, ImageOps
 from scapy.all import ARP, Ether, srp, send
@@ -106,7 +107,7 @@ def get_config_directory():
     home_directory = os.path.expanduser("~")
     """
     home_directory = Path.home()
-    config_directory = home_directory.joinpath('scanner')
+    config_directory = home_directory.joinpath("scanner")
     config_directory.mkdir(exist_ok=True)
     return config_directory
 
@@ -118,41 +119,50 @@ class VerticalScrolledFrame:
     :width:, :height:, :bg: are passed to the underlying Canvas
     :bg: and all other keyword arguments are passed to the inner Frame
     note that a widget layed out in this frame will have a self.master 3 layers deep,
-    (outer Frame, Canvas, inner Frame) so 
+    (outer Frame, Canvas, inner Frame) so
     if you subclass this there is no built in way for the children to access it.
     You need to provide the controller separately.
     https://gist.github.com/novel-yet-trivial/3eddfce704db3082e38c84664fc1fdf8
     (changed a little)
     """
+
     def __init__(self, master, **kwargs):
-        width = kwargs.pop('width', None)
-        height = kwargs.pop('height', None)
-        bg = kwargs.pop('bg', kwargs.pop('background', None))
+        width = kwargs.pop("width", None)
+        height = kwargs.pop("height", None)
+        bg = kwargs.pop("bg", kwargs.pop("background", None))
         self.outer = Frame(master, **kwargs)
-        
+
         if True:
             self.vsb = Scrollbar(self.outer, orient=VERTICAL)
             self.vsb.pack(fill=Y, side=RIGHT, expand=NO)
         else:
             style = Style()
             style.configure("RW.TLabel", foreground="red", background="black")
-            self.vsb = Scrollbar(self.outer, orient=VERTICAL, cursor="arrow", style="RW.TLabel")
+            self.vsb = Scrollbar(
+                self.outer, orient=VERTICAL, cursor="arrow", style="RW.TLabel"
+            )
             self.vsb.pack(fill=Y, side=RIGHT, expand=NO)
-            
-        self.canvas = Canvas(self.outer, highlightthickness=0, width=width, height=height, bg=bg)
+
+        self.canvas = Canvas(
+            self.outer, highlightthickness=0, width=width, height=height, bg=bg
+        )
         self.canvas.pack(side=TOP, fill=BOTH, expand=YES)
-        self.canvas['yscrollcommand'] = self.vsb.set
+        self.canvas["yscrollcommand"] = self.vsb.set
         # mouse scroll does not seem to work with just "bind"; You have
         # to use "bind_all". Therefore to use multiple windows you have
         # to bind_all in the current widget
         self.canvas.bind("<Enter>", self._bind_mouse)
         self.canvas.bind("<Leave>", self._unbind_mouse)
-        self.canvas.addtag_all("all")   # (added) for configuring width
-        self.vsb['command'] = self.canvas.yview
+        self.canvas.addtag_all("all")  # (added) for configuring width
+        self.vsb["command"] = self.canvas.yview
         self.inner = Frame(self.canvas, bg=bg)
         # pack the inner Frame into the Canvas with the topleft corner 4 pixels offset
-        self.canvas.create_window(0, 0, window=self.inner, anchor='nw') # changed - starts from (0, 0)
-        self.canvas.bind("<Configure>", self._on_frame_configure)   # (changed) canvas bind instead of inner
+        self.canvas.create_window(
+            0, 0, window=self.inner, anchor="nw"
+        )  # changed - starts from (0, 0)
+        self.canvas.bind(
+            "<Configure>", self._on_frame_configure
+        )  # (changed) canvas bind instead of inner
         self.outer_attr = set(dir(Widget))
 
     def __getattr__(self, item):
@@ -166,9 +176,9 @@ class VerticalScrolledFrame:
     def _on_frame_configure(self, event=None):
         x1, y1, x2, y2 = self.canvas.bbox("all")
         height = self.canvas.winfo_height()
-        width = self.canvas.winfo_width()   # (added) to resize inner frame
+        width = self.canvas.winfo_width()  # (added) to resize inner frame
         self.canvas.config(scrollregion=(0, 0, x2, max(y2, height)))
-        self.canvas.itemconfigure("all", width=width)   # (added) to resize inner frame
+        self.canvas.itemconfigure("all", width=width)  # (added) to resize inner frame
 
     def _bind_mouse(self, event=None):
         self.canvas.bind_all("<4>", self._on_mousewheel)
@@ -183,9 +193,9 @@ class VerticalScrolledFrame:
     def _on_mousewheel(self, event):
         """Linux uses event.num; Windows / Mac uses event.delta"""
         if event.num == 4 or event.delta > 0:
-            self.canvas.yview_scroll(-1, "units" )
+            self.canvas.yview_scroll(-1, "units")
         elif event.num == 5 or event.delta < 0:
-            self.canvas.yview_scroll(1, "units" )
+            self.canvas.yview_scroll(1, "units")
 
     def __str__(self):
         return str(self.outer)
@@ -367,7 +377,7 @@ class ScannerClass:
 
             else:
                 bssid_minus = bssid.replace(":", "-")
-                bssid_minus_half = '-'.join(bssid_minus.split('-')[:3])
+                bssid_minus_half = "-".join(bssid_minus.split("-")[:3])
                 gateway_ip_lines = [
                     line.split()[0]
                     for line in response_lines
@@ -832,9 +842,9 @@ class GuiClass(Frame):
         self.set_night_mode_attributes()
         self.positive_color = "green"
         self.negative_color = "grey"
-        self.active_text = ' ACTIVE '
-        self.inactive_text = 'INACTIVE'
-        
+        self.active_text = " ACTIVE "
+        self.inactive_text = "INACTIVE"
+
         self.deauth_button_deauth_text = " DEAUTH"
         self.deauth_button_restore_text = "RESTORE"
         self.deauth_positive_color = self.positive_color
@@ -850,13 +860,13 @@ class GuiClass(Frame):
         # raised, sunken, flat, ridge, solid, groove
         self.relief = "groove"
         self.entry_relief = "sunken"
-        if os.name == 'nt':
+        if os.name == "nt":
             # self.app_font = "Lucida console"
             # self.app_font = "MS Gothic"
             self.app_font = "Source Code Pro Medium"
         else:
             self.app_font = "DejaVu Sans Mono"
-            
+
         self.mono_small = font.Font(family=self.app_font, size=8, weight="normal")
         self.mono_medium = font.Font(family=self.app_font, size=8, weight="normal")
         self.mono_big = font.Font(family=self.app_font, size=11, weight="normal")
@@ -883,9 +893,9 @@ class GuiClass(Frame):
 
     def update_rows_after(self):
         """update rows using table, with after method"""
-        after_timeout = 500 # [ms]
+        after_timeout = 500  # [ms]
         # after_timeout = 10 # [ms]
-        
+
         if self.hold_thread:
             self.after_id = self.master.after(after_timeout, self.update_rows_after)
             return None
@@ -931,17 +941,16 @@ class GuiClass(Frame):
         topbar = Frame(self.master, relief=self.relief)
         topbar.pack(expand=NO, fill=BOTH, side=TOP, ipady=4)
 
-
         # use wrapper
-        vertical_scrolled_frame = VerticalScrolledFrame(self.master, relief=self.relief, bg=self.widgets_bg_color)
+        vertical_scrolled_frame = VerticalScrolledFrame(
+            self.master, relief=self.relief, bg=self.widgets_bg_color
+        )
         vertical_scrolled_frame.pack(expand=YES, fill=BOTH, side=TOP)
-        
-        
+
         # ************** frame for rows (common -> self) **************
         # ~ self.rows_frame = Frame(self.master, relief=self.relief)    # just in case of problems with scrollbar
         self.rows_frame = Frame(vertical_scrolled_frame, relief=self.relief)
         self.rows_frame.pack(expand=YES, fill=BOTH, side=TOP)
-
 
         # ************** footer **************
         footer = Frame(self.master, relief=self.relief)
@@ -1048,9 +1057,9 @@ class GuiClass(Frame):
             else:
                 # create new row at the bottom
                 self.create_row(row)
-                if self.config['sound']:
+                if self.config["sound"]:
                     # add sound bell here
-                    print(colored('[+] new device (sound here)', self.color))
+                    print(colored("[+] new device (sound here)", self.color))
         return None
 
     def color_by_status(self, status):
@@ -1082,13 +1091,14 @@ class GuiClass(Frame):
         row = Frame(row_wrapper, relief=self.relief)
         row.pack(expand=YES, fill=BOTH, side=TOP, ipady=4)
         if self.draw_horizontal_lines:
-            horizontal_line = Frame(row_wrapper, relief=self.relief, bg='white')     # black/blue/grey/white
+            horizontal_line = Frame(
+                row_wrapper, relief=self.relief, bg="white"
+            )  # black/blue/grey/white
             horizontal_line.pack(expand=YES, fill=X, side=TOP, ipady=1)
-            
+
             # ~ long_label = Label(horizontal_line,relief=self.relief, font=self.mono_medium, text='----'*40, bg=self.widgets_bg_color, fg=self.widgets_fg_color,)
             # ~ long_label.pack(expand=YES, fill=X, side=TOP)
-            
-            
+
         # remove button (for removing ghost clients)
         remove_client_button = Button(
             row,
@@ -1425,7 +1435,10 @@ class GuiClass(Frame):
         """set attributes depend on night mode status"""
         # ~ bg_dark_color, bg_bright_color = "black", "#d4d4ca"
         # bg_dark_color, bg_bright_color = "black", "#ddddd2"
-        bg_dark_color, bg_bright_color,  = "black", self.original_color
+        bg_dark_color, bg_bright_color, = (
+            "black",
+            self.original_color,
+        )
         fg_dark_color, fg_bright_color = "black", "yellow"
         # entry_bright_color, entry_dark_color = "white", "grey"    # todo
 
@@ -1461,7 +1474,7 @@ class GuiClass(Frame):
                 img = self.get_proper_image(self.sound_mode_image)
                 value.config(image=img)
                 value.image = img
-            elif key == 'vertical_scrolled_frame':
+            elif key == "vertical_scrolled_frame":
                 # ~ canvas has only background
                 value.canvas.config(bg=self.widgets_bg_color)
                 continue
@@ -1517,9 +1530,9 @@ class GuiClass(Frame):
 
 def scanner_cli():
     """commandline entry point"""
-    if os.name == 'nt':
-        os.system('color')
-        
+    if os.name == "nt":
+        os.system("color")
+
     # ******** objects ********
     matcher = DevicesMatcher()
     gui = GuiClass(master=Tk())
@@ -1613,4 +1626,3 @@ image and/or text on button:
     -
     
 """
-
