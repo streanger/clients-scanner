@@ -33,7 +33,7 @@ setuptools.setup(
     },
     entry_points={
         "console_scripts": [
-            "scanner=clients_scanner:scanner_entrypoint",
+            "scanner=clients_scanner:scanner_gui",
         ]
     },
     classifiers=[

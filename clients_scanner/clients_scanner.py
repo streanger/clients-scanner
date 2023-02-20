@@ -674,7 +674,7 @@ class ScannerGUI(Frame, ConfigAndStyle):
         return None
 
 
-def scanner_entrypoint():
+def scanner_gui():
     """commandline entrypoint"""
     if os.name == "nt":
         os.system("color")
@@ -689,4 +689,4 @@ def scanner_entrypoint():
 
 
 if __name__ == "__main__":
-    scanner_entrypoint()
+    scanner_gui()

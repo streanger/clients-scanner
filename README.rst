@@ -49,8 +49,8 @@ from python
 
 .. code-block:: python
 
-    from clients_scanner import scanner
-    scanner()
+    from clients_scanner import scanner_gui
+    scanner_gui()
 
 from command-line
 
