@@ -6,3 +6,4 @@ include LICENSE.txt
 
 # Include the data files
 recursive-include clients_scanner/images *
+recursive-include clients_scanner/sounds *

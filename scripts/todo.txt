@@ -1,0 +1,95 @@
+
+26.05.2020, todo:
+	fix widgets positions (padx, pady, etc)
+	add frame for main rows
+	add scrollbar for frame with rows
+	make "night-mode-button" functional (+)
+	consider replacing topbar label (images) and buttons, to buttons with images (+)
+	add entries for timings in topbar (minimal time for visible, searching time)
+	think of scapy slow import
+	fix gui (with changes above), to work on linux
+	log users activity, to file, in the following format, line by line:
+        <current time>, <client mac>, <True/False>
+	think of scanning for open ports
+	make info about device (vendor, ip, mac) possible to copy
+	define device type, by vendor, if not specified by user
+	add bar with info about columns:
+	DEVICE_TYPE, NAME, INFO, VISIBLE, DEAUTH, DEAUTH_CONTROLL
+	think of early warning system, if device is seen
+	consider splitting main class, into three independend (gui, search_clients, deauth)
+	provide handle for searching gateway_ip and gateway_mac (independend of interface)
+	store config files in package files directory
+    
+13.06.2021
+	-wrapping text in tkinter label:
+		https://stackoverflow.com/questions/11949391/how-do-i-use-tkinter-to-create-line-wrapped-text-that-fills-the-width-of-the-win
+		welcomenote = Label(root, text="Your long text", font="helvetica 14", 
+		wraplength=300, justify="center")
+		welcomenote.pack()
+		
+	-justify text in entry widget:
+		https://stackoverflow.com/questions/14386113/python-ttk-entry-how-to-center-the-input
+		e = ttk.Entry(master, ..., justify='center')
+		
+	-row by row different color
+	-queue for writing to json file?
+	-threading errors:
+		https://stackoverflow.com/questions/14694408/runtimeerror-main-thread-is-not-in-main-loop
+	-info:
+		mainloop wasn't executed
+	-image and/or text on button:
+		https://www.geeksforgeeks.org/python-add-image-on-a-tkinter-button/
+
+08.07.2021
+    -there may be problems with deauth poison/restore - for now status is not stored on gui side, only switching
+    
+11.07.2021:
+    -problem to solve:
+        https://gist.github.com/novel-yet-trivial/3eddfce704db3082e38c84664fc1fdf8
+        This has been a huge help.
+        How do I resize the inner frame to be the same width as the outer frame? I have tried assigning different widths in the VerticalScrolledFrame constructor and in self.inner, but the only way I have been able to get the inner frame width to match the outer has been to resize the outer one.
+        EDIT:
+        According to winfo_width() for the self.canvas, its window, and self.inner, I am able to resize them using a configure-type binding event on self.outer, but the widgets inside of self.inner do not resize along with everything else.
+    -think of canvas_dynamically.py on_resize method
+
+26.03.2022:
+    -tkinter vs tkinter.ttk widgets
+        https://stackoverflow.com/questions/19561727/what-is-the-difference-between-the-widgets-of-tkinter-and-tkinter-ttk-in-python
+        https://discuss.python.org/t/tkinter-support-scrollbar-look-modification/7189
+        https://www.geeksforgeeks.org/python-add-style-to-tkinter-button/
+    -https://dev.to/zeyu2001/network-scanning-with-scapy-in-python-3off
+    -
+	
+24.11.2022:
+    https://stackoverflow.com/questions/14284492/how-to-change-text-cursor-color-in-tkinter
+    https://stackoverflow.com/questions/9996599/tkinters-pack-propagate-method
+    
+26.11.2022:
+    -make gui class to derive from Style and Config classes, where all refered fields are defined (attrs and methods)
+    https://stackoverflow.com/questions/56845491/super-in-tkinter-application
+    https://stackoverflow.com/questions/10482953/python-extending-with-using-super-python-3-vs-python-2
+
+27.11.2022:
+    https://www.geeksforgeeks.org/python-tkinter-scrolledtext-widget/
+    https://stackoverflow.com/questions/38159653/how-to-multicolour-text-with-scrolledtext-widget
+    https://www.reddit.com/r/learnpython/comments/kch0g3/tkinter_resize_frame_with_mouse/
+    
+04.12.2022:
+    https://stackoverflow.com/questions/15995783/how-to-delete-all-children-elements
+    https://stackoverflow.com/questions/1316767/how-can-i-explicitly-free-memory-in-python
+
+06.12.2022:
+    https://icons8.com/
+    https://stackoverflow.com/questions/39054156/tkinter-custom-create-buttons
+    https://github.com/TomSchimansky/CustomTkinter
+
+29.01.2022:
+    https://iq-inc.com/importerror-attempted-relative-import/#packages-explained
+    https://stackoverflow.com/questions/20075884/python-import-module-from-another-directory-at-the-same-level-in-project-hierar
+	https://chrisyeh96.github.io/2017/08/08/definitive-guide-python-imports.html
+    
+19.02.2023:
+    -gui still need to be reshaped (for now uses pack over grid)
+    -writing to .json could be handled using database (tinydb or similar) 
+    -handling change of network and/or choosing network/interface
+    

@@ -1,0 +1,65 @@
+{
+    "18:af:de:ff:aa:ff": {
+        "bssid": "aa:bb:cc:dd:ee:ff",
+        "ip": "11.8.33.44",
+        "last_seen": "2023-02-19 23:20:15.938502",
+        "mac": "18:af:de:ff:aa:ff",
+        "name": "phone",
+        "ssid": "My wifi network",
+        "vendor": "Analog Devices, Inc."
+    },
+    "58:af:de:ff:aa:ff": {
+        "bssid": "aa:bb:cc:dd:ee:ff",
+        "ip": "11.83.33.44",
+        "last_seen": "2023-02-19 21:23:44.143093",
+        "mac": "58:af:de:ff:aa:ff",
+        "name": "dad laptop",
+        "ssid": "My wifi network",
+        "vendor": "Goepel Electronic GmbH"
+    },
+    "5e:af:de:ff:aa:ff": {
+        "bssid": "aa:bb:cc:dd:ee:ff",
+        "ip": "11.66.33.44",
+        "last_seen": "2023-02-19 21:23:44.143093",
+        "mac": "5e:af:de:ff:aa:ff",
+        "name": "my laptop",
+        "ssid": "My wifi network",
+        "vendor": "Compuprint S.P.A."
+    },
+    "70:af:de:ff:aa:ff": {
+        "bssid": "aa:bb:cc:dd:ee:ff",
+        "ip": "11.134.33.44",
+        "last_seen": "2023-02-19 21:23:44.143093",
+        "mac": "70:af:de:ff:aa:ff",
+        "name": "raspberry",
+        "ssid": "My wifi network",
+        "vendor": "Korea Data Systems"
+    },
+    "94:af:de:ff:aa:ff": {
+        "bssid": "aa:bb:cc:dd:ee:ff",
+        "ip": "11.15.33.44",
+        "last_seen": "2023-02-19 21:23:44.143093",
+        "mac": "94:af:de:ff:aa:ff",
+        "name": "pc",
+        "ssid": "My wifi network",
+        "vendor": "Banderacom, Inc."
+    },
+    "e1:af:de:ff:aa:ff": {
+        "bssid": "aa:bb:cc:dd:ee:ff",
+        "ip": "11.138.33.44",
+        "last_seen": "2023-02-19 21:23:44.143093",
+        "mac": "e1:af:de:ff:aa:ff",
+        "name": "smartwatch",
+        "ssid": "My wifi network",
+        "vendor": "United Internetworks, Inc."
+    },
+    "fe:af:de:ff:aa:ff": {
+        "bssid": "aa:bb:cc:dd:ee:ff",
+        "ip": "11.208.33.44",
+        "last_seen": "2023-02-19 21:23:44.143093",
+        "mac": "fe:af:de:ff:aa:ff",
+        "name": "router",
+        "ssid": "My wifi network",
+        "vendor": "UNIQA, Inc."
+    }
+}

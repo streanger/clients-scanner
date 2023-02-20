@@ -1,18 +1,23 @@
 import sys
 import os
 import setuptools
+from pathlib import Path
 
-current_path = os.path.realpath(os.path.dirname(sys.argv[0]))
-os.chdir(current_path)
 
-with open("README.rst", "r") as fh:
-    long_description = fh.read()
+version_path = Path(__file__).parent / "duplicate/__version__.py"
+version_info = {}
+exec(version_path.read_text(), version_info)
+long_description = Path("README.rst").read_text()
+requirements = Path('requirements.txt').read_text().splitlines()
+# pip install scapy Pillow mac-vendor-lookup termcolor playsound
 
-images = [os.path.join('images', item) for item in os.listdir('clients_scanner/images') if item.endswith('.png')]
+images = [os.path.join('images', item) for item in os.listdir('clients_scanner/images')]
+sounds = [os.path.join('sounds', item) for item in os.listdir('clients_scanner/sounds')]
+files = images + sounds
 
 setuptools.setup(
     name='clients_scanner',
-    version='0.1.2',
+    version=version_info['__version__'],
     author="streanger",
     author_email="divisionexe@gmail.com",
     description="local network clients scanner, with possibility of deauthentication",
@@ -21,10 +26,10 @@ setuptools.setup(
     url="https://github.com/streanger/clients_scanner",
     packages=['clients_scanner',],
     license='MIT',
-    install_requires=['Pillow', 'scapy', 'mac-vendor-lookup', 'termcolor'],
+    install_requires=requirements,
     include_package_data=True,
     package_data={
-        'clients_scanner': images,
+        'clients_scanner': files,
     },
     entry_points={
         "console_scripts": [
@@ -34,6 +39,7 @@ setuptools.setup(
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
-        "Operating System :: OS Independent",
+        "Operating System :: Microsoft :: Windows",
+        "Operating System :: POSIX :: Linux",
     ],
 )

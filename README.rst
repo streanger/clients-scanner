@@ -1,90 +1,82 @@
 clients_scanner
-===========
-Local network clients scanner, with possibility of deauthentication
+======================
+Local network clients scanner with deauth feature
 
 Info
-===========
-    - when creating app I was inspired by Android Fing application
-    - application shows local network devices
-    - discovered devices are stored in clients.json file
-    - application allow to perform deauthentication(disconnecting devices connected over WiFi)
-    - deauthentication bases on: https://github.com/roglew/wifikill
-    - any future changes are described in "Todo" section
-    
+======================
+- while creating app I was inspired by Android Fing application
+- application shows local network devices
+- discovered devices are stored in clients.json file under home directory
+- application allow to perform deauthentication(disconnecting devices connected over WiFi)
+- deauthentication bases on: https://github.com/roglew/wifikill
+- icons by Icons8: https://icons8.com/
+- sounds from: https://mixkit.co/
+
 Install
-===========
+======================
 
 .. code-block:: python
 
     pip install clients_scanner
-    
+
 or
 
 .. code-block:: bash
 
     pip install git+https://github.com/streanger/clients_scanner.git
-    
+
+**Important: scapy uses `Npcap` or `Winpcap` on Windows and `libpcap` on Linux. Please install needed package manually**
+
+Windows:
+.. code-block:: bash
+
+    # https://npcap.com/
+    # https://www.winpcap.org/install/
+    choco install nmap -y
+
+Linux
+.. code-block:: bash
+
+    sudo apt-get install git libpcap-dev
+
 Usage
-===========
+======================
 
 from python
 
 .. code-block:: python
 
     from clients_scanner import scanner
-
     scanner()
-    # then just press enter, and wait for gui app to start running
-    # due to slow import of scapy, it could take few seconds
 
-from cli
+from commandline
 
 .. code-block:: bash
 
     scanner
 
-Example application view
-===========
-.. image:: images/example_view.png
+Example view
+======================
+.. image:: images/scanner.png
 
-Todo
-===========
-26.05.2020, todo:
+Keywords and icons
+======================
+- router -> .. image:: clients_scanner/images/router.png
+- laptop -> .. image:: clients_scanner/images/laptop.png
 
-    - fix widgets positions (padx, pady, etc)
 
-    - add frame for main rows
+Changelog
+======================
+- v. 0.1.3
+ - reshaped gui
+ - night mode
+ - scan on/off mode
+ - debug mode
+ - "removing clients" feature
+ - scrollable area
+ - more friendly sound
+ - config files in user home directory
 
-    - add scrollbar for frame with rows
-
-    - make "night-mode-button" functional
-
-    - consider replacing topbar label (images) and buttons, to buttons with images
-
-    - add entries for timings in topbar (minimal time for visible, searching time)
-
-    - think of scapy slow import
-
-    - fix gui (with changes above), to work on linux
-
-    - log users activity, to file, in the following format, line by line:
-    
-      <current time>, <client mac>, <True/False>
-
-    - think of scanning for open ports
-
-    - make info about device (vendor, ip, mac) possible to copy
-
-    - define device type, by vendor, if not specified by user
-
-    - add bar with info about columns:
-    
-      DEVICE_TYPE, NAME, INFO, VISIBLE, DEAUTH, DEAUTH_CONTROLL
-
-    - think of early warning system, if device is seen
-
-    - consider splitting main class, into three independend (gui, search_clients, deauth)
-
-    - provide handle for searching gateway_ip and gateway_mac (independend of interface)
-    
-    - store config files in package files directory
+- v. 0.1.0 - 0.1.1
+ - gui with limited rows number
+ - deauth feature
