@@ -47,17 +47,8 @@ class VerticalScrolledFrame:
         bg = kwargs.pop("bg", kwargs.pop("background", None))
         self.outer = Frame(master, **kwargs)
 
-        if True:
-            self.vsb = Scrollbar(self.outer, orient=VERTICAL)
-            self.vsb.pack(fill=Y, side=RIGHT, expand=NO)
-        else:
-            style = Style()
-            style.configure("RW.TLabel", foreground="red", background="black")
-            self.vsb = Scrollbar(
-                self.outer, orient=VERTICAL, cursor="arrow", style="RW.TLabel"
-            )
-            self.vsb.pack(fill=Y, side=RIGHT, expand=NO)
-
+        self.vsb = Scrollbar(self.outer, orient=VERTICAL)
+        self.vsb.pack(fill=Y, side=RIGHT, expand=NO)
         self.canvas = Canvas(
             self.outer, highlightthickness=0, width=width, height=height, bg=bg
         )
