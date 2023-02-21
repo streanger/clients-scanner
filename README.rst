@@ -25,7 +25,7 @@ or
 
     pip install git+https://github.com/streanger/clients-scanner.git
 
-Important: scapy requires ``Npcap`` (https://npcap.com/#download) or ``Winpcap`` (https://www.winpcap.org/install/) on Windows and ``libpcap`` on Linux. Please install needed package manually
+**Important**: scapy requires ``Npcap`` (https://npcap.com/#download) or ``Winpcap`` (https://www.winpcap.org/install/) on Windows and ``libpcap`` on Linux. Please install needed package manually
 
 Windows:
 
@@ -41,6 +41,8 @@ Linux
 .. code-block:: bash
 
     sudo apt-get install libpcap-dev
+
+**Important**: you may need to run script as sudo under Linux to work properly
 
 Usage
 ======================
