@@ -58,8 +58,6 @@ Main scanner gui
     # from command-line
     scanner
 
----
-
 ScapyScanner
 
 .. code-block:: python
@@ -78,14 +76,13 @@ ScapyScanner
         item = scapy_scanner.clients_queue.get()
         print(item)
         # Client(mac='XXXX', ip='XXXX', bssid='XXXX', ssid='XXXX', time=XXXX)
----
 
 Deauthenticator
 
 .. code-block:: python
 
     from clients_scanner import Deauthenticator
-    deauth = Deauthenticator(gateway_ip='192.168.0.1', gateway_mac=mac)
+    deauth = Deauthenticator(gateway_ip='192.168.0.1', gateway_mac='aa:bb:cc:dd:ee:ff')
     deauth.run()
     victim_ip = '192.168.0.123'
     victim_mac = 'aa:bb:cc:dd:ee:ff'
@@ -94,7 +91,7 @@ Deauthenticator
 
 Example view
 ======================
-.. image:: images/scanner.png
+.. image:: https://raw.githubusercontent.com/streanger/clients-scanner/master/images/scanner.png
 
 Changelog
 ======================
@@ -113,3 +110,8 @@ Changelog
 
   - gui with limited rows number
   - deauth feature
+  
+Issues
+======================
+
+If you encounter anny issue, error, bug or you want to enchant project, please describe it `in issues section <https://github.com/streanger/clients-scanner/issues>`_
