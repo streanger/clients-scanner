@@ -1,2 +1,2 @@
-from clients_scanner.clients_scanner import scanner_gui
-scanner_gui()
+from clients_scanner import scanner
+scanner()

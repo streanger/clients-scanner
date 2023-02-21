@@ -17,7 +17,7 @@ class ConfigAndStyle:
             self.log = lambda text, color: print(colored(text, color))
         else:
             self.log = log
-        self.log('[*] ConfigAndStyle init', self.color)
+        self.log('[*] config init', self.color)
         self.config_file = "config.json"
         self.config_directory = get_config_directory()
         self.log("[*] config_directory: {}".format(self.config_directory), self.color)

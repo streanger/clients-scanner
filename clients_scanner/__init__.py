@@ -1,5 +1,5 @@
-from clients_scanner.clients_scanner import VerticalScrolledFrame, Scanner, DevicesMatcher, Deauthenticator, ScannerGUI, scanner_gui
-__all__ = ["VerticalScrolledFrame", "Scanner", "DevicesMatcher", "Deauthenticator", "ScannerGUI", "scanner_gui"]
+from clients_scanner.clients_scanner import VerticalScrolledFrame, ScapyScanner, DevicesMatcher, Deauthenticator, ScannerGUI, scanner
+__all__ = ["VerticalScrolledFrame", "ScapyScanner", "DevicesMatcher", "Deauthenticator", "ScannerGUI", "scanner"]
 
 """
 project tree:

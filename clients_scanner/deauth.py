@@ -15,6 +15,8 @@ class Deauthenticator:
     gateway_ip - you can pass it to constructor or set as attribute to object
     if gateway_ip is None `run` raises TypeError
 
+    deauth_queue format:
+        (victim_mac, victim_ip, status)
     dictionary format:
         {
             victim_mac: {

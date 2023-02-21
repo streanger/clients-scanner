@@ -19,7 +19,7 @@ from clients_scanner.config import ConfigAndStyle
 from clients_scanner.deauth import Deauthenticator
 from clients_scanner.logger import Logger, log
 from clients_scanner.matcher import DevicesMatcher
-from clients_scanner.scanner import Scanner
+from clients_scanner.scanner import ScapyScanner
 from clients_scanner.scrolled_frame import VerticalScrolledFrame
 from clients_scanner.utils import (get_proper_image, write_json,
                                    notification_sound, hide_console)
@@ -37,7 +37,7 @@ class ScannerGUI(Frame, ConfigAndStyle):
             self.log = log
 
         # ******** components ********
-        self.scanner = Scanner(debug=False, scan=self.config['scan'])
+        self.scanner = ScapyScanner(debug=False, scan=self.config['scan'])
         if not self.scanner.run():
             raise Exception('scanner failed to start properly, ssid, bssid: ({}, {})'.format(self.scanner.ssid, self.scanner.bssid))
         gateway_ip, gateway_mac = self.scanner.gateway_ip, self.scanner.gateway_mac
@@ -674,12 +674,13 @@ class ScannerGUI(Frame, ConfigAndStyle):
         return None
 
 
-def scanner_gui():
+def scanner(hide=False):
     """commandline entrypoint"""
     if os.name == "nt":
         os.system("color")
-        # hide_console()
-
+        if hide:
+            # for now supported on Windows only
+            hide_console()
     try:
         app = ScannerGUI(master=Tk())
         app.mainloop()
@@ -689,4 +690,4 @@ def scanner_gui():
 
 
 if __name__ == "__main__":
-    scanner_gui()
+    scanner()

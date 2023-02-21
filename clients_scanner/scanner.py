@@ -18,8 +18,8 @@ from clients_scanner.logger import log
 Client = namedtuple("Client", "mac ip bssid ssid time")
 
 
-class Scanner:
-    """class accepts cooperates with matcher and deauthenticator objects
+class ScapyScanner:
+    """class for cooperate with matcher and deauthenticator objects
     https://www.juniper.net/documentation/en_US/junos-space-apps/network-director3.7/topics/concept/wireless-ssid-bssid-essid.html
     console color - magenta
     """
@@ -159,7 +159,7 @@ class Scanner:
             if self.join_thread_flag:
                 return False
 
-            clients = self._get_clients(self.target_ip, self.scan_time, iterations=1)
+            clients = self.get_clients(self.target_ip, self.scan_time, iterations=1)
             self.log('[*] found: {}'.format(clients), self.color)
             # in case of change in ssid/bssid we should send all data
             now = time.time()
@@ -171,10 +171,11 @@ class Scanner:
     @staticmethod
     def get_gateway(bssid=""):
         """get gateway_ip and gateway_mac
-        wrong response from arp command (arp -n | grep wlan0 | head -n 1):
-            8.8.4.4                          (incomplete)                              wlan0
-        positive response:
-            192.168.43.1             ether   60:ab:67:e9:78:60   C                     wlan0
+
+        commands:
+            arp -n | grep wlan0 | head -n 1
+            arp -n
+            ip route
         """
         os_name = os.name
         if os_name == "nt":
@@ -265,8 +266,9 @@ class Scanner:
                 bssid = (bssid_line[0].split("Access Point:", 1)[1]).strip().lower()
         return (ssid, bssid)
 
-    def _get_clients(self, target_ip, timeout, iterations=1):
+    def get_clients(self, target_ip, timeout=2, iterations=1):
         """get all clients in local network; return list of (ip, mac)
+
         https://scapy.readthedocs.io/en/latest/usage.html#ip-scan
         https://scapy.readthedocs.io/en/latest/usage.html#arp-ping
         """
@@ -288,9 +290,9 @@ class Scanner:
 
 if __name__ == "__main__":
     print('import it as module rather than call')
-    scanner = Scanner(debug=False)
-    scanner.run()
+    scapy_scanner = ScapyScanner(debug=False)
+    scapy_scanner.run()
     while True:
-        item = scanner.clients_queue.get()
+        item = scapy_scanner.clients_queue.get()
         print(item)
         

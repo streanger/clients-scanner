@@ -45,18 +45,52 @@ Linux
 Usage
 ======================
 
-from python
+Main scanner gui
 
 .. code-block:: python
 
-    from clients_scanner import scanner_gui
-    scanner_gui()
-
-from command-line
+    # from Python
+    from clients_scanner import scanner
+    scanner()
 
 .. code-block:: bash
 
+    # from command-line
     scanner
+
+---
+
+ScapyScanner
+
+.. code-block:: python
+
+    from clients_scanner import ScapyScanner
+    scapy_scanner = ScapyScanner()
+
+    # get clients directly
+    clients = scapy_scanner.get_clients('192.168.0.1/24', timeout=2)
+    for (IP, mac) in clients:
+        print(IP, mac)
+
+    # get enriched clients data from queue
+    scapy_scanner.run()
+    while True:
+        item = scapy_scanner.clients_queue.get()
+        print(item)
+        # Client(mac='XXXX', ip='XXXX', bssid='XXXX', ssid='XXXX', time=XXXX)
+---
+
+Deauthenticator
+
+.. code-block:: python
+
+    from clients_scanner import Deauthenticator
+    deauth = Deauthenticator(gateway_ip='192.168.0.1', gateway_mac=mac)
+    deauth.run()
+    victim_ip = '192.168.0.123'
+    victim_mac = 'aa:bb:cc:dd:ee:ff'
+    status = False
+    deauth.deauth_queue.put((victim_mac, victim_ip, status))
 
 Example view
 ======================
@@ -64,7 +98,7 @@ Example view
 
 Changelog
 ======================
-- `v. 0.1.3`
+- `v. 0.1.2`
 
   - reshaped gui
   - night mode

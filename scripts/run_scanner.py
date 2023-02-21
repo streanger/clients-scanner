@@ -4,7 +4,7 @@ from pathlib import Path
 
 upper = str(Path(__file__).parent.parent)
 sys.path.append(upper)
-from clients_scanner import scanner_gui
+from clients_scanner import scanner
 
 # run scanner gui
-scanner_gui()
+scanner()
