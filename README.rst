@@ -2,6 +2,8 @@ clients-scanner
 ======================
 Local network clients scanner with deauth feature
 
+.. image:: https://raw.githubusercontent.com/streanger/clients-scanner/master/images/scanner.png
+
 Info
 ======================
 - while creating app I was inspired by Android Fing application
@@ -90,10 +92,6 @@ Deauthenticator
     victim_mac = 'aa:bb:cc:dd:ee:ff'
     status = False
     deauth.deauth_queue.put((victim_mac, victim_ip, status))
-
-Example view
-======================
-.. image:: https://raw.githubusercontent.com/streanger/clients-scanner/master/images/scanner.png
 
 Changelog
 ======================
