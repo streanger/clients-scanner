@@ -23,7 +23,7 @@ setuptools.setup(
     description="Local network clients scanner with deauth feature",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/streanger/clients_scanner",
+    url="https://github.com/streanger/clients-scanner",
     packages=['clients_scanner',],
     license='MIT',
     install_requires=requirements,
